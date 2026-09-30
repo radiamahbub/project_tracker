@@ -1,0 +1,33 @@
+
+{% if messages %}
+    {% for m in messages %}
+        <div class="alert alert-secondary alert-dismissible fade show my-3 shadow-sm" role="alert">
+            <div class="d-flex align-items-center">
+                <span class="me-2">💬</span>
+                <span>{{ m }}</span>
+            </div>
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+{% comment %}
+{% if messages %}
+    {% for m in messages %}
+        <div class="alert alert-{{ m.tags|default:'secondary' }} alert-dismissible fade show my-3 shadow-sm" role="alert">
+            {{ m }}
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endif %}
+
+ {% endcomment %}

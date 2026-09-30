@@ -6,6 +6,7 @@ from django.contrib import messages
 from project.models import *
 
 # Create your views here.
+@login_required
 def home(request):
     return render(request, 'project/home.html')
 
@@ -15,7 +16,7 @@ def add_project(request):
         project_name = request.POST.get('project_name')
         project_description = request.POST.get('project_description')
         project_image = request.FILES.get('project_image')
-        project_status = request.POST.get('project_name')
+        project_status = request.POST.get('project_status')
         deadline = request.POST.get('deadline')
 
         ProjectModel.objects.create(
@@ -48,17 +49,17 @@ def update_project(request, p_id):
             project_name = request.POST.get('project_name')
             project_description = request.POST.get('project_description')
             project_image = request.FILES.get('project_image')
-            project_status = request.POST.get('project_name')
+            project_status = request.POST.get('project_status')
             deadline = request.POST.get('deadline')
 
-            p_data.project_name =project_name,
-            p_data.project_description  =project_description ,
+            p_data.project_name =project_name
+            p_data.project_description  =project_description
 
             if project_image:
-                p_data.project_image =project_image,
+                p_data.project_image =project_image
 
-            p_data.project_status=project_status,
-            p_data.deadline =deadline,
+            p_data.project_status=project_status
+            p_data.deadline =deadline
 
             p_data.save()
 
@@ -69,13 +70,13 @@ def update_project(request, p_id):
     }
 
     
-    return render(request, 'project/update_project.html')
+    return render(request, 'project/update_project.html', context)
 
 def delete_project(request, p_id):
 
     ProjectModel.objects.get(id = p_id).delete()
 
-    return redirect('product_list')
+    return redirect('project_list')
 
 
 
@@ -88,16 +89,42 @@ def register_page(request):
         password = request.POST.get('password')
         confirm_password = request.POST.get('confirm_password')
 
+        user_exist = UserModel.objects.filter(username=username).exists()
 
+        if user_exist:
+            messages.warning(request,'User already exists.')
+            return redirect('register')
 
+        if password == confirm_password:
+            UserModel.objects.create_user(
+                        username=username,
+                        email=email, 
+                        student_name=student_name,
+                        student_id=student_id,
+                        password=password,
+                    )
+            return redirect('login')
 
     return render(request, 'project/register.html')
 
-def login_page(request):
 
+def login_page(request):
+    if request.method == "POST":
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+
+            user_info = authenticate(request, username=username, password=password)
+
+            if user_info:
+                 login(request, user_info)
+                 return redirect('home')
+            else:
+                 messages.warning(request,'Invalid Credentials.')
     return render(request, 'project/login.html')
 
 def logout_page(request):
 
-    return redirect('project/login')
+    logout(request)
+
+    return redirect('login')
 

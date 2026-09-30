@@ -7,7 +7,7 @@
 {% block content %}
 
     <h1 class="m-5 text-center">Enter Project Here</h1>
-    <form method="POST", enctype="multipart/form-data">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Project name</label>
@@ -19,7 +19,8 @@
         </div>
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Image</label>
-            <input type="files" name="project_image" class="form-control" id="exampleInputPassword1">
+            <input type="file" name="project_image" class="form-control" id="exampleInputPassword1">
+            
         </div>
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Project Status</label>

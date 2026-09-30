@@ -28,16 +28,16 @@
                 <tr>
                     <td>{{forloop.counter}}</td>
                     <td>{{data.project_name}}</td>
-                    <td>{{data.project_description}}<</td>
+                    <td>{{data.project_description}}</td>
                     <td>{% if data.project_image %}
                         <img src="{{data.project_image.url}}" width="100px" alt="">
                         {% else %}
                             No preview    
                         {% endif %}</td>
-                    <td>{{data.project_status}}<</td>
-                    <td>{{data.deadline}}<</td>
-                    <td>{{created_at}}<</td>
-                    <td>{{updated_at}}<</td>
+                    <td>{{data.project_status}}</td>
+                    <td>{{data.deadline}}</td>
+                    <td>{{data.created_at}}</td>
+                    <td>{{data.updated_at}}</td>
                     
                     <td>
                         <a href="{% url 'update_project' data.id %}" class="btn btn-info">Edit</a>
