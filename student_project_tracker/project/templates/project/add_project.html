@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    | Add project
+{% endblock title %}
+
+{% block content %}
+
+    <h1 class="m-5 text-center">Enter Project Here</h1>
+    <form method="POST", enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Project name</label>
+            <input type="text" name="project_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Description</label>
+            <textarea name="project_description" class="form-control" id=""></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Image</label>
+            <input type="files" name="project_image" class="form-control" id="exampleInputPassword1">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Project Status</label>
+            <select class="form-select" name="project_status" aria-label="Default select example">
+            <option selected>Select option from here</option>
+            <option value="NotStarted">Not Started</option>
+            <option value="InProgress">In Progress</option>
+            <option value="Completed">Completed</option>
+            </select>
+                    </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">deadline</label>
+            <input type="date" name="deadline" class="form-control" id="exampleInputPassword1">
+        </div>
+        <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+{% endblock content %}

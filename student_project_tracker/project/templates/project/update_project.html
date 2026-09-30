@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    | Update Project
+{% endblock title %}
+
+{% block content %}
+
+    <h1 class="m-5 text-center">Update Project Here</h1>
+    <form method="POST", enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Project name</label>
+            <input type="text" name="project_name" value="{{p_data.project_name }}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Description</label>
+            <textarea name="project_description" class="form-control" id="">{{p_data.project_description}}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Image</label>
+            {% if p_data.project_image %}
+                    <img src="{{p_data.project_image.url}}" width="100px" alt="" class="m-2">
+            {% else %}
+                    No preview    
+            {% endif %}
+            <input type="files" name="project_image" value="{{p_data.project_image}}" class="form-control" id="exampleInputPassword1">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Project Status</label>
+            <select class="form-select" name="project_status" aria-label="Default select example">
+            <option>Select option from here</option>
+            <option value="NotStarted"
+            
+            {% if p_data.project_status == "NotStarted" %}
+                selected
+            {% endif %}
+            >Not Started</option>
+            <option value="InProgress"
+            {% if p_data.project_status == "InProgress" %}
+                selected
+            {% endif %}
+            >In Progress</option>
+            <option value="Completed"
+            {% if p_data.project_status == "Completed" %}
+                selected
+            {% endif %}
+            >Completed</option>
+            </select>
+                    </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">deadline</label>
+            <input type="date" name="deadline" value="{{p_data.deadline}}" class="form-control" id="exampleInputPassword1">
+        </div>
+        <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+    </form>
+{% endblock content %}

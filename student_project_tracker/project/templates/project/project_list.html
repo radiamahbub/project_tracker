@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    | Home
+{% endblock title %}
+    
+
+{% block content %}
+    <h1 class="m-5 text-center">Project Info</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>SL</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Status</th>
+                <th>Deadline</th>
+                <th>Created At</th>
+                <th>Updated At</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            
+            {% for data in p_data %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{data.project_name}}</td>
+                    <td>{{data.project_description}}<</td>
+                    <td>{% if data.project_image %}
+                        <img src="{{data.project_image.url}}" width="100px" alt="">
+                        {% else %}
+                            No preview    
+                        {% endif %}</td>
+                    <td>{{data.project_status}}<</td>
+                    <td>{{data.deadline}}<</td>
+                    <td>{{created_at}}<</td>
+                    <td>{{updated_at}}<</td>
+                    
+                    <td>
+                        <a href="{% url 'update_project' data.id %}" class="btn btn-info">Edit</a>
+                        <a href="{% url 'delete_project' data.id %}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+                
+        </tbody>
+
+    </table>
+
+{% endblock content %}

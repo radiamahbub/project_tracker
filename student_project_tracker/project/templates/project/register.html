@@ -1,0 +1,47 @@
+{% extends 'auth_base.html' %}
+
+
+{% block title %}
+    Register
+{% endblock title %}
+
+
+{% block content %}
+
+<h1 class="m-5 text-center">Register Page</h1>
+<form method="POST">
+    {% csrf_token %}
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Username</label>
+    <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Password</label>
+    <input type="password" name="passowrd" class="form-control" id="exampleInputPassword1">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+    <input type="password" name="confirm_password" class="form-control" id="exampleInputPassword1">
+  </div>
+
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Student Name</label>
+    <input type="text" name="student_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Student ID</label>
+    <input type="text" name="student_id" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Register</button>
+  <a href="{% url 'login' %}">Already have an account?</a>
+</form>
+
+    
+{% endblock content %}
+    
+    
