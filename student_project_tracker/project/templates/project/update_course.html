@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Update Blog
+{% endblock title %}
+    
+{% block content %}
+    
+    <h1 class="text-center m-3">Post Your Blog Here</h1>
+    <form action="" method="POST" enctype="multipart/form-data" class="m-3">
+        {% csrf_token %}
+        {{form_data.as_p}}
+        
+        <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+    </form>
+            
+{% endblock content %}

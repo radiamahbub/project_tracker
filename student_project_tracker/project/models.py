@@ -26,3 +26,19 @@ class ProjectModel(models.Model):
 
     def __str__(self):
             return f'{self.project_name}'
+
+
+class CourseModel(models.Model):
+     CATEGORY = [
+          ('CSE','CSE'),
+          ('EEE','EEE'),
+          ('CIVIL','CIVIL'),
+     ]
+     course_name = models.CharField(max_length=200, null=True)
+     description = models.TextField(null=True)
+     category = models.CharField(choices=CATEGORY, max_length=20, null=True)
+     course_image = models.ImageField(upload_to='media/course_img', null=True)
+     course_fee = models.IntegerField(null=True)
+
+     def __str__(self):
+          return f'{self.course_name}'

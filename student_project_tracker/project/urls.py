@@ -8,6 +8,10 @@ urlpatterns = [
     path('update_project/<str:p_id>/', update_project, name='update_project'),
     path('delete_project/<str:p_id>/', delete_project, name='delete_project'),
 
+    path('add_course/', add_course, name='add_course'),
+    path('course_list/', course_list, name='course_list'),
+    path('update_course/<str:c_id>/', update_course, name='update_course'),
+    path('delete_course/<str:c_id>/', delete_course, name='delete_course'),
 
     path('login/', login_page, name='login'),
     path('register/', register_page, name='register'),

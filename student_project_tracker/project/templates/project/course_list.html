@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Add Course
+{% endblock title %}
+    
+{% block content %}
+    
+    <h1 class="text-center m-3">Course Info</h1>
+    <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>SL</th>
+            <th>Course name</th>
+            <th>Description</th>
+            <th>Cateory</th>
+            <th>Course Image</th>
+            <th>Course Fee</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for data in c_data %}
+           <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{data.course_name}}</td>
+                <td>{{data.description}}</td>
+                <td>{{data.category}}</td>
+                <td>
+                {% if data.course_image %}
+                    <img src="{{data.course_image.url}}" width="100px" alt="">
+                {% else %}
+                    No preview      
+                {% endif %}
+                    </td>
+                <td>{{data.course_fee}}</td>
+                <td>
+                            <a href="{% url 'course_update' data.id %}" class="btn btn-info">Edit</a>
+                            <a href="{% url 'course_delete' data.id %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+    
+            
+{% endblock content %}

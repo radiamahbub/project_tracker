@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 #from django.contrib.auth.models import AbstractUser
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from project.models import *
+from project.forms import *
 
 # Create your views here.
 @login_required
@@ -128,3 +129,47 @@ def logout_page(request):
 
     return redirect('login')
 
+
+def add_course(request):
+    form_data = CourseForm()
+    if request.method == 'POST':
+         form_data = CourseForm(request.POST, request.FILES)
+         if form_data.is_valid():
+              form_data.save()
+              return redirect('course_list')
+
+    context = {
+         'form_data':form_data
+    }
+    return render(request, 'project/add_course.html', context)
+
+def course_list(request):
+
+     c_data = CourseModel.objects.all()
+
+     context = {
+          'c_data':c_data
+     }
+     return render(request, 'project/course_list.html', context)
+
+def update_course(request, c_id):
+
+     c_data = get_object_or_404(CourseModel, id=c_id)
+
+     form_data = CourseForm(instance=c_data)
+
+     if request.method == 'POST':
+          form_data = CourseForm(request.POST, request.FILES, instance=c_data)
+          if form_data.is_valid():
+               form_data.save()
+               return redirect('course_list')
+
+          context = {
+               'c_data':c_data
+          }
+     return render(request, 'project/update_course.html', context)
+
+def delete_course(request, c_id):
+     c_data = get_object_or_404(CourseModel, id=c_id)
+     c_data.delete()
+     return redirect('course_list')
